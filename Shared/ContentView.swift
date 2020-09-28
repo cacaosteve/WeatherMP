@@ -2,8 +2,22 @@
 
 import SwiftUI
 
+extension UserDefaults {
+    @objc var cityName: Float {
+        get {
+            return float(forKey: "cityName")
+        }
+        set {
+            set(newValue, forKey: "cityName")
+        }
+    }
+}
+
 struct ContentView: View {
     @ObservedObject var fetcher = WeatherFetcher()
+    @ObservedObject var cityFetcher = CityIDFetcher()
+    @State var isPresentingModal: Bool = false
+    @AppStorage("cityName") var cityName = "San Diego"
     
     var body: some View {
         NavigationView{
@@ -25,10 +39,22 @@ struct ContentView: View {
                 }
             }
             .ignoresSafeArea()
+            .navigationBarItems(trailing: addButton)
             .navigationBarTitle(Text(fetcher.title))
             .alert(isPresented: $fetcher.showingAlert) {
                 Alert(title: Text("Error"), message: Text("There was an issue parsing data from the server"), dismissButton: .default(Text("Got it!")))
             }
+        }
+    }
+    
+    private var addButton: some View {
+        Button(action: {
+            self.isPresentingModal = true
+        }) {
+            Image(systemName: "plus.circle.fill") // magnifyingglass.circle.fill
+            .font(.title)
+        }.sheet(isPresented: $isPresentingModal) {
+            SearchView()
         }
     }
 }
