@@ -22,7 +22,8 @@ public class CityIDFetcher: ObservableObject {
     }
     
     func loadWithAF() {
-        let request = AF.request("https://www.metaweather.com/api/location/search/?query=\(cityName)")
+        let cityURLString = cityName.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        let request = AF.request("https://www.metaweather.com/api/location/search/?query=\(cityURLString!)")
         
         let decoder = JSONDecoder()
         
