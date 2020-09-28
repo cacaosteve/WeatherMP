@@ -3,12 +3,21 @@
 import SwiftUI
 
 extension UserDefaults {
-    @objc var cityName: Float {
+    @objc var cityName: String {
         get {
-            return float(forKey: "cityName")
+            return string(forKey: "cityName") ?? ""
         }
         set {
             set(newValue, forKey: "cityName")
+        }
+    }
+    
+    @objc var woeid: Int {
+        get {
+            return integer(forKey: "woeid") 
+        }
+        set {
+            set(newValue, forKey: "woeid")
         }
     }
 }

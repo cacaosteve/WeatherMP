@@ -10,7 +10,7 @@ struct SearchView : View {
         NavigationView {
             List {
                 Section {
-                    TextField("Search City", text: $cityName, onCommit:  {
+                    TextField("Search City", text: $search, onCommit:  {
                         
                     })
                 }
@@ -32,7 +32,7 @@ struct SearchView : View {
     
     private var doneButton: some View {
         Button(action: {
-            //cityStore.cityName = search
+            cityName = search
             
             self.presentationMode.wrappedValue.dismiss()
         }) {

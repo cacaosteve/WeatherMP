@@ -2,10 +2,6 @@ import SwiftUI
 import Alamofire
 import Combine
 
-struct ResponseData : Decodable {
-    var weathers: [Weather]
-}
-
 public class WeatherFetcher: ObservableObject {
     @Published var consolidatedWeathers = [ConsolidatedWeather]()
     @Published var title = ""
@@ -17,7 +13,7 @@ public class WeatherFetcher: ObservableObject {
         loadWithAF()
         
         UserDefaults.standard
-            .publisher(for: \.cityName)
+            .publisher(for: \.woeid)
             .handleEvents(receiveOutput: { cityName in
                 self.loadWithAF()
             })

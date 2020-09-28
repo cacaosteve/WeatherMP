@@ -2,10 +2,6 @@ import SwiftUI
 import Alamofire
 import Combine
 
-struct CityResponseData : Decodable {
-    var results: [City]
-}
-
 public class CityIDFetcher: ObservableObject {
     @Published var city = 0
     @Published var showingAlert = false
