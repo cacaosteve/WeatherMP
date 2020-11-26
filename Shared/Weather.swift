@@ -26,18 +26,64 @@ class Weather: Codable, Identifiable {
 struct ConsolidatedWeather : Codable, Identifiable {
     var id:Int
     var weatherStateName:String
-    var weatherStateAbbr:String
+    private var weatherStateAbbr:String
     var windDirectionCompass:String
 //    var created:Date
-    var applicableDate:String
+    private var applicableDate:String
     var minTemp:Double
-    var maxTemp:Double
+    private var maxTemp:Double
     var theTemp:Double
 //    var windSpeed:Double
 //    var windDirection:Double
 //    var humidity:Int
 //    var visibility:Double
 //    var predictability:Int
+    
+    var dayName : String {
+        get {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy'-'MM'-'dd'"
+            let date = dateFormatter.date(from: applicableDate)!
+            let dayNumber = Calendar.current.component(.weekday, from: date) // 1 - 7
+            let dayName = DateFormatter().shortWeekdaySymbols[dayNumber - 1]
+            return dayName
+        }
+    }
+    
+    var maxTempFahrenheit: Double {
+        get {
+            return (maxTemp * 1.8) + 32
+        }
+    }
+    
+    var weatherStateImageName: String {
+        get {
+            switch weatherStateAbbr {
+            case "c":
+                return "sun.max.fill"
+            case "h":
+                return "cloud.hail.fill"
+            case "hc":
+                return "cloud.fill"
+            case "hr":
+                return "cloud.heavyrain.fill"
+            case "lc":
+                return "cloud.sun.fill"
+            case "lr":
+                return "cloud.rain.fill"
+            case "s":
+                return "cloud.sun.rain.fill"
+            case "sl":
+                return "cloud.sleet.fill"
+            case "sn":
+                return "cloud.snow"
+            case "t":
+                return "cloud.bolt"
+            default:
+                return "sun.max.fill"
+            }
+        }
+    }
     
     private enum CodingKeys: String, CodingKey {
         case id
@@ -82,5 +128,11 @@ class Source: Codable {
     enum CodingKeys: String, CodingKey {
         case title, slug, url
         case crawlRate = "crawl_rate"
+    }
+}
+
+struct Weather_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }

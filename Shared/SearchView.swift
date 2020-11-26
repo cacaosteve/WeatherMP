@@ -3,7 +3,7 @@ import SwiftUI
 struct SearchView : View {
     @State private var search: String = ""
     @State private var isValidating: Bool = false
-    @AppStorage("cityName") var cityName = "San Diego"
+    @AppStorage("cityName") var cityName = "Cupertino"
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {

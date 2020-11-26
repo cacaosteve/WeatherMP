@@ -26,7 +26,7 @@ struct ContentView: View {
     @ObservedObject var fetcher = WeatherFetcher()
     @ObservedObject var cityFetcher = CityIDFetcher()
     @State var isPresentingModal: Bool = false
-    @AppStorage("cityName") var cityName = "San Diego"
+    @AppStorage("cityName") var cityName = "Cupertino"
     
     var body: some View {
         NavigationView{
@@ -35,12 +35,12 @@ struct ContentView: View {
                     VStack(alignment: .leading)  {
                         Text(consolidatedWeathers.applicableDate)
                         Text(consolidatedWeathers.weatherStateName)
-                        Text("Min: \(consolidatedWeathers.minTemp) ºC")
-                        Text("Max: \(consolidatedWeathers.maxTemp) ºC")
+                        Text("Min: \(consolidatedWeathers.minTemp)AA")
+                        Text("Max: \(consolidatedWeathers.maxTempFahrenheit)BB")
                     }
                     Spacer()
                     VStack(alignment: .trailing)  {
-                        Image(consolidatedWeathers.weatherStateAbbr)
+                        Image(consolidatedWeathers.weatherStateImageName)
                             .resizable()
                             .aspectRatio(contentMode: .fill)
                             .frame(width: 80, height: 80)
@@ -61,7 +61,7 @@ struct ContentView: View {
             self.isPresentingModal = true
         }) {
             Image(systemName: "plus.circle.fill") // magnifyingglass.circle.fill
-            .font(.title)
+                .font(.title)
         }.sheet(isPresented: $isPresentingModal) {
             SearchView()
         }

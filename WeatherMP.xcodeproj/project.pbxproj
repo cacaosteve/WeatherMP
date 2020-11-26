@@ -11,8 +11,6 @@
 		AA02FC40251BB65E005984B1 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA02FC3F251BB65E005984B1 /* Tests_macOS.swift */; };
 		AA02FC42251BB65E005984B1 /* WeatherMPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA02FC19251BB65C005984B1 /* WeatherMPApp.swift */; };
 		AA02FC43251BB65E005984B1 /* WeatherMPApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA02FC19251BB65C005984B1 /* WeatherMPApp.swift */; };
-		AA02FC44251BB65E005984B1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA02FC1A251BB65C005984B1 /* ContentView.swift */; };
-		AA02FC45251BB65E005984B1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA02FC1A251BB65C005984B1 /* ContentView.swift */; };
 		AA02FC46251BB65E005984B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA02FC1B251BB65E005984B1 /* Assets.xcassets */; };
 		AA02FC47251BB65E005984B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA02FC1B251BB65E005984B1 /* Assets.xcassets */; };
 		AA02FC61251BB823005984B1 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA02FC60251BB823005984B1 /* WidgetKit.framework */; };
@@ -30,6 +28,10 @@
 		AA02FC95251BBE16005984B1 /* WeatherIntent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = AA02FC7D251BBE15005984B1 /* WeatherIntent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AA204A8A252184B70098F048 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA204A89252184B70098F048 /* City.swift */; };
 		AA204A8B252184B70098F048 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA204A89252184B70098F048 /* City.swift */; };
+		AA44C7F025533E1500839D4F /* GoodContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA44C7EF25533E1500839D4F /* GoodContentView.swift */; };
+		AA44C7F125533E1500839D4F /* GoodContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA44C7EF25533E1500839D4F /* GoodContentView.swift */; };
+		AA44C80125535DBA00839D4F /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA44C80025535DBA00839D4F /* WeatherModel.swift */; };
+		AA44C80225535DBA00839D4F /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA44C80025535DBA00839D4F /* WeatherModel.swift */; };
 		AAB80B33251BD4F600B43E42 /* WeatherFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB80B32251BD4F600B43E42 /* WeatherFetcher.swift */; };
 		AAB80B34251BD4F600B43E42 /* WeatherFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB80B32251BD4F600B43E42 /* WeatherFetcher.swift */; };
 		AAB80B3D251BD5C900B43E42 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAB80B3C251BD5C900B43E42 /* Weather.swift */; };
@@ -100,7 +102,6 @@
 
 /* Begin PBXFileReference section */
 		AA02FC19251BB65C005984B1 /* WeatherMPApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherMPApp.swift; sourceTree = "<group>"; };
-		AA02FC1A251BB65C005984B1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AA02FC1B251BB65E005984B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA02FC20251BB65E005984B1 /* WeatherMP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherMP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA02FC23251BB65E005984B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -129,6 +130,8 @@
 		AA02FC8D251BBE16005984B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		AA02FC8F251BBE16005984B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA204A89252184B70098F048 /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		AA44C7EF25533E1500839D4F /* GoodContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoodContentView.swift; sourceTree = "<group>"; };
+		AA44C80025535DBA00839D4F /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 		AAB80B32251BD4F600B43E42 /* WeatherFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherFetcher.swift; sourceTree = "<group>"; };
 		AAB80B3C251BD5C900B43E42 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		AAB80B48251BE5AC00B43E42 /* response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = response.json; sourceTree = "<group>"; };
@@ -214,8 +217,9 @@
 			isa = PBXGroup;
 			children = (
 				AAB80B48251BE5AC00B43E42 /* response.json */,
+				AA44C80025535DBA00839D4F /* WeatherModel.swift */,
+				AA44C7EF25533E1500839D4F /* GoodContentView.swift */,
 				AA02FC19251BB65C005984B1 /* WeatherMPApp.swift */,
-				AA02FC1A251BB65C005984B1 /* ContentView.swift */,
 				AAB80B32251BD4F600B43E42 /* WeatherFetcher.swift */,
 				AAB80B3C251BD5C900B43E42 /* Weather.swift */,
 				AAB80B5B251C05D600B43E42 /* CityIDFetcher.swift */,
@@ -576,7 +580,8 @@
 				AAB80B33251BD4F600B43E42 /* WeatherFetcher.swift in Sources */,
 				AA02FC6C251BB824005984B1 /* WeatherMPWidget.intentdefinition in Sources */,
 				AA204A8A252184B70098F048 /* City.swift in Sources */,
-				AA02FC44251BB65E005984B1 /* ContentView.swift in Sources */,
+				AA44C80125535DBA00839D4F /* WeatherModel.swift in Sources */,
+				AA44C7F025533E1500839D4F /* GoodContentView.swift in Sources */,
 				AAB80B5C251C05D700B43E42 /* CityIDFetcher.swift in Sources */,
 				AAB80B81251C4E3200B43E42 /* SearchView.swift in Sources */,
 				AA02FC42251BB65E005984B1 /* WeatherMPApp.swift in Sources */,
@@ -591,10 +596,11 @@
 				AAB80B3E251BD5C900B43E42 /* Weather.swift in Sources */,
 				AAB80B34251BD4F600B43E42 /* WeatherFetcher.swift in Sources */,
 				AAB80B82251C4E3200B43E42 /* SearchView.swift in Sources */,
-				AA02FC45251BB65E005984B1 /* ContentView.swift in Sources */,
+				AA44C80225535DBA00839D4F /* WeatherModel.swift in Sources */,
 				AAB80B5D251C05D700B43E42 /* CityIDFetcher.swift in Sources */,
 				AA204A8B252184B70098F048 /* City.swift in Sources */,
 				AA02FC43251BB65E005984B1 /* WeatherMPApp.swift in Sources */,
+				AA44C7F125533E1500839D4F /* GoodContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -855,7 +861,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = zyszkiewicz.WeatherMP;
 				PRODUCT_NAME = WeatherMP;
 				SDKROOT = macosx;
@@ -879,7 +885,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = zyszkiewicz.WeatherMP;
 				PRODUCT_NAME = WeatherMP;
 				SDKROOT = macosx;
@@ -894,7 +900,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29XT7263X7;
 				INFOPLIST_FILE = "Tests iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -916,7 +922,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29XT7263X7;
 				INFOPLIST_FILE = "Tests iOS/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -945,7 +951,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "zyszkiewicz.Tests-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -967,7 +973,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = "zyszkiewicz.Tests-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
@@ -984,7 +990,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29XT7263X7;
 				INFOPLIST_FILE = WeatherMPWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1007,7 +1013,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29XT7263X7;
 				INFOPLIST_FILE = WeatherMPWidget/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1029,7 +1035,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29XT7263X7;
 				INFOPLIST_FILE = WeatherIntent/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1050,7 +1056,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29XT7263X7;
 				INFOPLIST_FILE = WeatherIntent/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1072,7 +1078,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29XT7263X7;
 				INFOPLIST_FILE = WeatherIntentUI/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1093,7 +1099,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29XT7263X7;
 				INFOPLIST_FILE = WeatherIntentUI/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

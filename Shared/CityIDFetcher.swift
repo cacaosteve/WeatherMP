@@ -5,7 +5,7 @@ import Combine
 public class CityIDFetcher: ObservableObject {
     @Published var city = 0
     @Published var showingAlert = false
-    @AppStorage("cityName") var cityName = "San Diego"
+    @AppStorage("cityName") var cityName = "Cupertino"
     @AppStorage("woeid") var woeid = 2487889
     var subscriptions = Set<AnyCancellable>()
     
