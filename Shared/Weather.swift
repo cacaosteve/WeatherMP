@@ -1,138 +1,112 @@
 import SwiftUI
 
-class Weather: Codable, Identifiable {
-    let consolidatedWeather: [ConsolidatedWeather]
-    let time, sunRise, sunSet, timezoneName: String
-    let parent: Parent
-    let sources: [Source]
-    let title, locationType: String
-    let woeid: Int
-    let lattLong, timezone: String
+// MARK: - Response
+struct Response: Codable {
+    let coord: Coord?
+    let weather: [Weather]?
+    let base: String?
+    let main: Main?
+    let visibility: Int?
+    let wind: Wind?
+    let clouds: Clouds?
+    let dt: Int?
+    let sys: Sys?
+    let timezone, id: Int?
+    let name: String?
+    let cod: Int?
+}
+
+// MARK: - Clouds
+struct Clouds: Codable {
+    let all: Int?
+}
+
+// MARK: - Coord
+struct Coord: Codable {
+    let lon, lat: Double?
+}
+
+// MARK: - Main
+struct Main: Codable {
+    let temp, feelsLike, tempMin, tempMax: Double?
+    let pressure, humidity: Int?
 
     enum CodingKeys: String, CodingKey {
-        case consolidatedWeather = "consolidated_weather"
-        case time
-        case sunRise = "sun_rise"
-        case sunSet = "sun_set"
-        case timezoneName = "timezone_name"
-        case parent, sources, title
-        case locationType = "location_type"
-        case woeid
-        case lattLong = "latt_long"
-        case timezone
+        case temp
+        case feelsLike = "feels_like"
+        case tempMin = "temp_min"
+        case tempMax = "temp_max"
+        case pressure, humidity
     }
 }
 
-struct ConsolidatedWeather : Codable, Identifiable {
-    var id:Int
-    var weatherStateName:String
-    private var weatherStateAbbr:String
-    var windDirectionCompass:String
-//    var created:Date
-    private var applicableDate:String
-    var minTemp:Double
-    private var maxTemp:Double
-    var theTemp:Double
-//    var windSpeed:Double
-//    var windDirection:Double
-//    var humidity:Int
-//    var visibility:Double
-//    var predictability:Int
-    
-    var dayName : String {
-        get {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy'-'MM'-'dd'"
-            let date = dateFormatter.date(from: applicableDate)!
-            let dayNumber = Calendar.current.component(.weekday, from: date) // 1 - 7
-            let dayName = DateFormatter().shortWeekdaySymbols[dayNumber - 1]
-            return dayName
-        }
-    }
-    
-    var maxTempFahrenheit: Double {
-        get {
-            return (maxTemp * 1.8) + 32
-        }
-    }
+// MARK: - Sys
+struct Sys: Codable {
+    let type, id: Int?
+    let message: Double?
+    let country: String?
+    let sunrise, sunset: Int?
+}
+
+// MARK: - Weather
+struct Weather: Codable {
+    let id: Int?
+    let main, weatherDescription, icon: String?
     
     var weatherStateImageName: String {
         get {
-            switch weatherStateAbbr {
-            case "c":
+            switch icon {
+            case "01d":
                 return "sun.max.fill"
-            case "h":
-                return "cloud.hail.fill"
-            case "hc":
-                return "cloud.fill"
-            case "hr":
-                return "cloud.heavyrain.fill"
-            case "lc":
+            case "01n":
+                return "sun.max.fill"
+            case "02d":
                 return "cloud.sun.fill"
-            case "lr":
-                return "cloud.rain.fill"
-            case "s":
+            case "02n":
+                return "cloud.sun.fill"
+            case "03d":
+                return "cloud.fill"
+            case "03n":
+                return "cloud.fill"
+            case "04d":
+                return "cloud.fog.fill"
+            case "04n":
+                return "cloud.fog.fill"
+            case "09d":
+                return "cloud.heavyrain.fill"
+            case "09n":
+                return "cloud.heavyrain.fill"
+            case "10d":
                 return "cloud.sun.rain.fill"
-            case "sl":
-                return "cloud.sleet.fill"
-            case "sn":
-                return "cloud.snow"
-            case "t":
+            case "10n":
+                return "cloud.sun.rain.fill"
+            case "11d":
                 return "cloud.bolt"
+            case "11n":
+                return "cloud.bolt"
+            case "13d":
+                return "cloud.snow"
+            case "13n":
+                return "cloud.snow"
+            case "50d":
+                return "cloud.sun.rain.fill"
+            case "50n":
+                return "cloud.sun.rain.fill"
             default:
-                return "sun.max.fill"
+                return ""
             }
         }
     }
-    
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case weatherStateName = "weather_state_name"
-        case weatherStateAbbr = "weather_state_abbr"
-        case windDirectionCompass = "wind_direction_compass"
-//        case created = "created"
-        case applicableDate = "applicable_date"
-        case minTemp = "min_temp"
-        case maxTemp = "max_temp"
-        case theTemp = "the_temp"
-//        case windSpeed = "wind_speed"
-//        case windDirection = "wind_direction"
-//        case humidity = "humidity"
-//        case visibility = "visibility"
-//        case predictability = "predictability"
-    }
-}
-
-//extension ConsolidatedWeather: Identifiable {
-//    var id: UUID { return uuid }
-//}
-
-class Parent: Codable {
-    let title, locationType: String
-    let woeid: Int
-    let lattLong: String
 
     enum CodingKeys: String, CodingKey {
-        case title
-        case locationType = "location_type"
-        case woeid
-        case lattLong = "latt_long"
+        case id, main
+        case weatherDescription = "description"
+        case icon
     }
 }
 
-class Source: Codable {
-    let title, slug: String
-    let url: String
-    let crawlRate: Int
-
-    enum CodingKeys: String, CodingKey {
-        case title, slug, url
-        case crawlRate = "crawl_rate"
-    }
-}
-
-struct Weather_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
-    }
+// MARK: - Wind
+struct Wind: Codable {
+    let speed: Double?
+    let deg: Int?
 }

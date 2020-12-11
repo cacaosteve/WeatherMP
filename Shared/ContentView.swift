@@ -14,7 +14,7 @@ extension UserDefaults {
     
     @objc var woeid: Int {
         get {
-            return integer(forKey: "woeid") 
+            return integer(forKey: "woeid")
         }
         set {
             set(newValue, forKey: "woeid")

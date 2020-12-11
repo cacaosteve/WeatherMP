@@ -3,18 +3,19 @@ import Alamofire
 import Combine
 
 public class WeatherFetcher: ObservableObject {
-    @Published var consolidatedWeathers = [ConsolidatedWeather]()
+    @Published var response : Response?
     @Published var title = ""
     @Published var showingAlert = false
-    @AppStorage("woeid") var woeid = 2487889
+    @Published var isLoading = false
+    @AppStorage("zip") var zip = 94024
     var subscriptions = Set<AnyCancellable>()
     
     init(){
         loadWithAF()
         
         UserDefaults.standard
-            .publisher(for: \.woeid)
-            .handleEvents(receiveOutput: { cityName in
+            .publisher(for: \.zip)
+            .handleEvents(receiveOutput: { zipCode in
                 self.loadWithAF()
             })
             .sink { _ in }
@@ -22,7 +23,8 @@ public class WeatherFetcher: ObservableObject {
     }
     
     func loadWithAF() {
-        let request = AF.request("https://www.metaweather.com/api/location/\(woeid)/")
+        isLoading = true
+        let request = AF.request("https://api.openweathermap.org/data/2.5/weather?zip=\(zip)&units=imperial&appid=c9f9c127d30aa092df526660d71c1167")
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -33,15 +35,16 @@ public class WeatherFetcher: ObservableObject {
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .formatted(formatter)
         
-        request.responseDecodable(of: Weather.self, decoder: decoder) { (response) in
+        request.responseDecodable(of: Response.self, decoder: decoder) { (response) in
             print(response)
             switch response.result {
             case .success(let value):
-                self.consolidatedWeathers = value.consolidatedWeather
-                self.title = value.title
+                self.response = value
+//                self.title = value.title
             case .failure( _):
                 self.showingAlert = true
             }
+            self.isLoading = false
         }
     }
 }

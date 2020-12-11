@@ -11,18 +11,7 @@ import SwiftUI
 struct WeatherMPApp: App {
     var body: some Scene {
         WindowGroup {
-            TabView {
-                GoodContentView(cityName: "Cupertino")
-                    .tabItem {
-                        Image(systemName: "house.fill")
-                        Text("Cupertino")
-                    }
-                GoodContentView(cityName: "San Diego")
-                    .tabItem {
-                        Image(systemName: "gift.fill")
-                        Text("San Diego")
-                    }
-            }
+            GoodContentView(cityName: "Cupertino")
         }
     }
 }

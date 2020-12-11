@@ -8,21 +8,12 @@
 import SwiftUI
 
 extension UserDefaults {
-    @objc var cityName: String {
+    @objc var zip: Int {
         get {
-            return string(forKey: "cityName") ?? ""
+            return integer(forKey: "zip")
         }
         set {
-            set(newValue, forKey: "cityName")
-        }
-    }
-    
-    @objc var woeid: Int {
-        get {
-            return integer(forKey: "woeid")
-        }
-        set {
-            set(newValue, forKey: "woeid")
+            set(newValue, forKey: "zip")
         }
     }
 }
@@ -31,34 +22,50 @@ struct GoodContentView: View {
     @State private var isNight = false
     @ObservedObject var fetcher = WeatherFetcher()
     var cityName : String
+    @State var isPresentingModal: Bool = false
     
     var body: some View {
         ZStack {
-            BackgroundView(isNight: $isNight)
-            VStack {
-                CityTextView(cityName: cityName)
-                
-                let cw = fetcher.consolidatedWeathers.first
-                
-                MainWeatherStatusView(imageName: cw?.weatherStateImageName ?? "", temperature: Int(cw?.maxTempFahrenheit ?? 0 ))
-                
-                HStack {
-                    ForEach(fetcher.consolidatedWeathers) { consolidatedWeather in
-                        WeatherDayView(dayOfWeek: consolidatedWeather.dayName, imageName: consolidatedWeather.weatherStateImageName, temperature: Int(consolidatedWeather.maxTempFahrenheit))
+            NavigationView{
+                ZStack {
+                    BackgroundView()
+                    VStack {
+                        CityTextView(cityName: fetcher.response?.name ?? "")
+                        
+                        let cw = fetcher.response
+                        
+                        MainWeatherStatusView(imageName: cw?.weather?.first?.weatherStateImageName ?? "", temperature: Int(cw?.main?.temp ?? 0) )
+                        
+                        //                    HStack {
+                        //                        ForEach(fetcher.consolidatedWeathers) { consolidatedWeather in
+                        //                            WeatherDayView(dayOfWeek: consolidatedWeather.dayName, imageName: consolidatedWeather.weatherStateImageName, temperature: Int(consolidatedWeather.maxTempFahrenheit))
+                        //                        }
+                        //                        .padding(3)
+                        //                    }
+                        
+                        Spacer()
                     }
-                    .padding(3)
                 }
-                
-                Spacer()
-                
-                Button {
-                    isNight = !isNight
-                } label: {
-                    WeatherButton(title: "Change Day Time", textColor: .blue, backgroundColor: .white)
+                .navigationBarItems(trailing: addButton)
+                .alert(isPresented: $fetcher.showingAlert) {
+                    Alert(title: Text("Zip Code Not Found"), message: Text("Please enter a 5 digit zip code."), dismissButton: .default(Text("OK")))
                 }
-                
-                Spacer()
             }
+            
+            if (fetcher.isLoading) {
+                LoadingView()
+            }
+        }
+    }
+    
+    private var addButton: some View {
+        Button(action: {
+            self.isPresentingModal = true
+        }) {
+            Image(systemName: "plus.circle.fill") // magnifyingglass.circle.fill
+                .font(.title)
+        }.sheet(isPresented: $isPresentingModal) {
+            SearchView()
         }
     }
 }
@@ -96,10 +103,10 @@ struct WeatherDayView: View {
 
 struct BackgroundView: View {
     
-    @Binding var isNight: Bool
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        LinearGradient(gradient: Gradient(colors: [isNight ? .black : .blue, isNight ? .gray: Color("lightBlue")]),
+        LinearGradient(gradient: Gradient(colors: [colorScheme == .dark ? .black : .blue, colorScheme == .dark ? .gray: Color("lightBlue")]),
                        startPoint: .topLeading,
                        endPoint: .bottomTrailing)
             .edgesIgnoringSafeArea(.all)

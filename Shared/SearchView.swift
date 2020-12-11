@@ -3,20 +3,20 @@ import SwiftUI
 struct SearchView : View {
     @State private var search: String = ""
     @State private var isValidating: Bool = false
-    @AppStorage("cityName") var cityName = "Cupertino"
+    @AppStorage("zip") var zip = 94024
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
         NavigationView {
             List {
                 Section {
-                    TextField("Search City", text: $search, onCommit:  {
+                    TextField("Search Zip", text: $search, onCommit:  {
                         
                     })
                 }
             }
                 .disabled(isValidating)
-                .navigationBarTitle(Text("Add City"))
+                .navigationBarTitle(Text("Find by Zip Code"))
                 .navigationBarItems(trailing: doneButton)
                 .listStyle(GroupedListStyle())
         }
@@ -32,7 +32,7 @@ struct SearchView : View {
     
     private var doneButton: some View {
         Button(action: {
-            cityName = search
+            zip = Int(search) ?? 0
             
             self.presentationMode.wrappedValue.dismiss()
         }) {
