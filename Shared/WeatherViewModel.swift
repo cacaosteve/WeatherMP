@@ -70,7 +70,6 @@ public class WeatherViewModel: ObservableObject {
                 if let id = UserDefaults.standard.object(forKey: "id") {
                     UserDefaults.standard.setValue(self.zip, forKey: id as! String)
                 }
-//                self.title = value.title
             case .failure( _):
                 self.showingAlert = true
             }
