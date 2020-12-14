@@ -1,10 +1,3 @@
-//
-//  Framework.swift
-//  Apple-Frameworks
-//
-//  Created by steve on 11/3/20.
-//
-
 import Foundation
 
 struct WeatherModel: Identifiable {

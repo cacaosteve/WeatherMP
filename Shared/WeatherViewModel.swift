@@ -1,10 +1,13 @@
 import SwiftUI
 import Alamofire
 import Combine
+import SwiftKeychainWrapper
 
-public class WeatherFetcher: ObservableObject {
+public class WeatherViewModel: ObservableObject {
     @Published var response : Response?
     @Published var title = ""
+    @Published var name = ""
+    @Published var id = 0
     @Published var showingAlert = false
     @Published var isLoading = false
     @AppStorage("zip") var zip = 94024
@@ -20,6 +23,30 @@ public class WeatherFetcher: ObservableObject {
             })
             .sink { _ in }
             .store(in: &subscriptions)
+        
+        UserDefaults.standard
+            .publisher(for: \.name)
+            .handleEvents(receiveOutput: { name in
+                self.name = name
+            })
+            .sink { _ in }
+            .store(in: &subscriptions)
+        
+        UserDefaults.standard
+            .publisher(for: \.id)
+            .handleEvents(receiveOutput: { id in
+                self.id = id
+            })
+            .sink { _ in }
+            .store(in: &subscriptions)
+    }
+    
+    func logout() {
+        self.name = ""
+        self.id = 0
+        UserDefaults.standard.removeObject(forKey: "name")
+        UserDefaults.standard.removeObject(forKey: "id")
+        KeychainWrapper.standard.removeObject(forKey: "access_token")
     }
     
     func loadWithAF() {
@@ -40,6 +67,9 @@ public class WeatherFetcher: ObservableObject {
             switch response.result {
             case .success(let value):
                 self.response = value
+                if let id = UserDefaults.standard.object(forKey: "id") {
+                    UserDefaults.standard.setValue(self.zip, forKey: id as! String)
+                }
 //                self.title = value.title
             case .failure( _):
                 self.showingAlert = true

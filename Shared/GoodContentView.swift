@@ -6,6 +6,18 @@
 //
 
 import SwiftUI
+import OAuthSwift
+
+extension UserDefaults {
+    @objc var id: Int {
+        get {
+            return integer(forKey: "id")
+        }
+        set {
+            set(newValue, forKey: "id")
+        }
+    }
+}
 
 extension UserDefaults {
     @objc var zip: Int {
@@ -18,11 +30,23 @@ extension UserDefaults {
     }
 }
 
+extension UserDefaults {
+    @objc var name: String {
+        get {
+            return string(forKey: "name") ?? ""
+        }
+        set {
+            set(newValue, forKey: "name")
+        }
+    }
+}
+
 struct GoodContentView: View {
     @State private var isNight = false
-    @ObservedObject var fetcher = WeatherFetcher()
+    @ObservedObject var weatherViewModel = WeatherViewModel()
     var cityName : String
     @State var isPresentingModal: Bool = false
+    @State var isPresentingSafariModal: Bool = false
     
     var body: some View {
         ZStack {
@@ -30,9 +54,21 @@ struct GoodContentView: View {
                 ZStack {
                     BackgroundView()
                     VStack {
-                        CityTextView(cityName: fetcher.response?.name ?? "")
+                        if weatherViewModel.id == 0 {
+                            loginButton
+                        }
+                        else {
+                            logoutButton
+                        }
                         
-                        let cw = fetcher.response
+                        Text(weatherViewModel.name)
+                            .fontWeight(.semibold)
+                            .font(.system(.title, design: .rounded))
+                            .foregroundColor(.primary)
+                        
+                        CityTextView(cityName: weatherViewModel.response?.name ?? "")
+                        
+                        let cw = weatherViewModel.response
                         
                         MainWeatherStatusView(imageName: cw?.weather?.first?.weatherStateImageName ?? "", temperature: Int(cw?.main?.temp ?? 0) )
                         
@@ -47,14 +83,57 @@ struct GoodContentView: View {
                     }
                 }
                 .navigationBarItems(trailing: addButton)
-                .alert(isPresented: $fetcher.showingAlert) {
+                .alert(isPresented: $weatherViewModel.showingAlert) {
                     Alert(title: Text("Zip Code Not Found"), message: Text("Please enter a 5 digit zip code."), dismissButton: .default(Text("OK")))
                 }
             }
             
-            if (fetcher.isLoading) {
+            if (weatherViewModel.isLoading) {
                 LoadingView()
             }
+        }
+    }
+    
+    func loginWithFacebook() {
+        let oauthswift = OAuth2Swift(
+          consumerKey: "732008171068255",
+          consumerSecret: "7d090ca45feef4e4820822f268efc0ce",
+          authorizeUrl: "https://www.facebook.com/v9.0/dialog/oauth",
+          accessTokenUrl: "https://www.facebook.com/v9.0/dialog/oauth/access_token",
+          responseType: "token"
+        )
+
+        let vc = UIHostingController(rootView: self)
+        oauthswift.allowMissingStateCheck = true
+        oauthswift.authorizeURLHandler = SafariURLHandler(viewController: vc, oauthSwift: oauthswift)
+        
+        guard let rwURL = URL(string: "fb732008171068255://authorize") else { return }
+        oauthswift.authorize(withCallbackURL: rwURL, scope: "email", state: "state123abc", completionHandler: { response in
+
+        })
+    }
+    
+    private var logoutButton: some View {
+        Button(action: {
+            weatherViewModel.logout()
+        }) {
+            Text("Logout")
+                .fontWeight(.bold)
+                .font(.system(.largeTitle, design: .rounded))
+                .foregroundColor(.primary)
+        }
+    }
+    
+    private var loginButton: some View {
+        Button(action: {
+            self.isPresentingSafariModal = true
+        }) {
+            Text("Login with Facebook")
+                .fontWeight(.bold)
+                .font(.system(.largeTitle, design: .rounded))
+                .foregroundColor(.primary)
+        }.sheet(isPresented: $isPresentingSafariModal) {
+            ViewView()
         }
     }
     
@@ -62,7 +141,7 @@ struct GoodContentView: View {
         Button(action: {
             self.isPresentingModal = true
         }) {
-            Image(systemName: "plus.circle.fill") // magnifyingglass.circle.fill
+            Image(systemName: "magnifyingglass.circle.fill") // magnifyingglass.circle.fill
                 .font(.title)
         }.sheet(isPresented: $isPresentingModal) {
             SearchView()

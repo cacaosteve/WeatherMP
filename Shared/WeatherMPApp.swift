@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import OAuthSwift
 
 @main
 struct WeatherMPApp: App {
     var body: some Scene {
         WindowGroup {
             GoodContentView(cityName: "Cupertino")
+                .onOpenURL { url in
+                    OAuthSwift.handle(url: url)
+                }
         }
     }
 }
