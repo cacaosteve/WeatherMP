@@ -19,7 +19,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
             doAuth()
         }
         else {
-            dismiss(animated: true, completion: nil)
+            //dismiss(animated: true, completion: nil)
         }
     }
     
