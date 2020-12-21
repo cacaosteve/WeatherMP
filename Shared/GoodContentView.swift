@@ -7,6 +7,8 @@
 
 import SwiftUI
 import OAuthSwift
+import Combine
+import AuthenticationServices
 
 extension UserDefaults {
     @objc var id: Int {
@@ -44,6 +46,7 @@ extension UserDefaults {
 struct GoodContentView: View {
     @State private var isNight = false
     @ObservedObject var weatherViewModel = WeatherViewModel()
+    @ObservedObject var signInViewModel = SignInViewModel()
     var cityName : String
     @State var isPresentingModal: Bool = false
     @State var isPresentingSafariModal: Bool = false
@@ -54,7 +57,7 @@ struct GoodContentView: View {
                 ZStack {
                     BackgroundView()
                     VStack {
-                        if weatherViewModel.id == 0 {
+                        if weatherViewModel.name == "" {
                             loginButton
                         }
                         else {
@@ -126,7 +129,8 @@ struct GoodContentView: View {
     
     private var loginButton: some View {
         Button(action: {
-            self.isPresentingSafariModal = true
+            //self.isPresentingSafariModal = true
+            signInViewModel.signIn()
         }) {
             Text("Login with Facebook")
                 .fontWeight(.bold)
